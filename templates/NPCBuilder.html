@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Setting Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      padding: 20px;
+      background-color: #4CAF50;
+      color: white;
+    }
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Setting Builder</h1>
+    </div>
+    <form action="/submit-setting" method="post">
+      <label for="setting-name">Setting Name:</label>
+      <input type="text" id="setting-name" name="setting-name"><br><br>
+    <!--Setting Types-->
+      <label for="setting-type">Type:</label>
+      <select id="setting-type" name="setting-types" required>
+        {% for type in setting_elements['setting_type'] %}
+                <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+      </select><br><br>
+    <!--Setting Subtypes-->
+      <label for="setting-subtype">Subtype:</label>
+      <select id="setting-subtype" name="setting-subtypes" required>
+        {% for subtype in setting_elements['setting_subtype'] %}
+                <option value="{{ type }}">{{ subtype }}</option>
+            {% endfor %}
+      </select><br><br>
+    <!--Setting Tones-->
+      <label for="setting-tone">Story Tone:</label>
+      <select id="setting-tone" name="setting-tones" >
+        {% for tone in setting_elements['setting_tones'] %}
+                <option value="{{ type }}">{{ tone }}</option>
+            {% endfor %}
+      </select><br><br>
+    <!--Setting Sizes-->
+      <label for="setting-size">Size:</label>
+      <select id="setting-size" name="setting-size" >
+        {% for size in setting_elements['setting_sizes'] %}
+                <option value="{{ type }}">{{ size }}</option>
+            {% endfor %}
+      </select><br><br>
+
+      <label for="setting-description">Setting Description:</label>
+      <textarea id="setting-description" name="setting-description" ></textarea><br><br>
+
+      <label for="negative-description">Negative Description:</label>
+      <textarea id="negative-description" name="negative-description" ></textarea><br><br>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <script>
+    // Fetch options for Setting Type from the backend
+    fetch('/get-setting-types')
+      .then(response => response.json())
+      .then(data => {
+        const selectElement = document.getElementById('setting-type');
+        data.forEach(option => {
+          const optionElement = document.createElement('option');
+          optionElement.value = option;
+          optionElement.textContent = option;
+          selectElement.appendChild(optionElement);
+        });
+      });
+
+    // Fetch options for Setting Subtype from the backend
+    fetch('/get-setting-subtypes')
+      .then(response => response.json())
+      .then(data => {
+        const selectElement

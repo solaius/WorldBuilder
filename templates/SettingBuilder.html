@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Setting Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      padding: 20px;
+      background-color: #4CAF50;
+      color: white;
+    }
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    label {
+      font-weight: bold;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Setting Builder</h1>
+    </div>
+    <form action="/settingbuilder" method="post">
+      <br>
+      <label for="setting-name">Setting Name:</label>
+      <input type="text" id="setting-name" name="setting-name" ><br><br>
+
+      <div class="grid-container">
+        <div>
+          <label for="setting-type">Setting Type:</label>
+          <select id="setting-type" name="setting-types" required>
+            <option value="" disabled selected>Select a type</option>
+            {% for type in setting_elements['setting_type'] %}
+              <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+          </select><br><br>
+        </div>
+        <div>
+          <label for="setting-subtype">Setting Subtype:</label>
+          <select id="setting-subtype" name="setting-subtypes" required>
+            <option value="" disabled selected>Select a subtype</option>
+            {% for subtype in setting_elements['setting_subtype'] %}
+              <option value="{{ subtype }}">{{ subtype }}</option>
+            {% endfor %}
+          </select><br><br>
+        </div>
+        <div>
+          <label for="setting-tone">Story Tone:</label>
+          <select id="setting-tone" name="setting-tones">
+            <option value="" disabled selected>Select a tone</option>
+            {% for tone in setting_elements['setting_tone'] %}
+              <option value="{{ tone }}">{{ tone }}</option>
+            {% endfor %}
+          </select><br><br>
+        </div>
+        <div>
+          <label for="setting-size">Size:</label>
+          <select id="setting-size" name="setting-size">
+            <option value="" disabled selected>Select a size</option>
+            {% for size in setting_elements['setting_size'] %}
+              <option value="{{ size }}">{{ size }}</option>
+            {% endfor %}
+          </select><br><br>
+        </div>
+      </div>
+
+      <label for="setting-description">Setting Description:</label>
+      <textarea id="setting-description" name="setting-description" ></textarea><br><br>
+
+      <label for="negative-description">Negative Description:</label>
+      <textarea id="negative-description" name="negative-description" ></textarea><br><br>
+
+      <input type="submit" value="submit">
+    </form>
+  </div>
+</body>
+</html>
