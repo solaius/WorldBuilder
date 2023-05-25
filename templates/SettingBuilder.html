@@ -116,7 +116,12 @@
       <label for="negative-description">Negative Description:</label>
       <textarea id="negative-description" name="negative-description" ></textarea><br><br>
 
-      <input type="submit" value="submit">
+      <input type="submit" value="submit"><br><br>
+
+      <div class="response-container">
+        <h1>Response from GPT-3.5 Turbo:</h1>
+        <p>{{ setting_elements["gpt_response"] }}</p>
+    </div>
     </form>
   </div>
 </body>

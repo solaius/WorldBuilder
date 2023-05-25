@@ -1,7 +1,10 @@
 import sqlite3
 
+from constants import wb_db_path
+from gpt.gpt_3T import gpt_turbo_query
+
 # Connect to the SQLite database
-conn = sqlite3.connect('data/world_builder.db')
+conn = sqlite3.connect(wb_db_path)
 cursor = conn.cursor()
 
 # Setting Types
@@ -44,9 +47,12 @@ setting_elements = {
     "setting_description": "",
     "setting_name": "",
     "setting_negative_prompt": "",
+    "gpt_response": ""
 }
 
 def submit_setting(setting_name, setting_type, setting_subtype, setting_tone, setting_size, setting_description, negative_description):
+    system_role = "World Building Assistant"
+    
     # Generate prompt based on the form inputs
     prompt = f"Create a ficticious setting for a role playing game with the following details:\n\n"  
 
@@ -76,5 +82,5 @@ def submit_setting(setting_name, setting_type, setting_subtype, setting_tone, se
     prompt += "Please use your creativity to develop an engaging and immersive setting."
 
     # Use the generated prompt to pass it to GPT for further processing
-
+    setting_elements["gpt_response"] = gpt_turbo_query(system_role, prompt)
     return 
