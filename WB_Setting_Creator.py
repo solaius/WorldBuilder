@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connect to the SQLite database
-conn = sqlite3.connect('database/world_builder.db')
+conn = sqlite3.connect('data/world_builder.db')
 cursor = conn.cursor()
 
 # Setting Types
