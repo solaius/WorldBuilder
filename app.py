@@ -27,7 +27,7 @@ def Submit_Setting():
 
 @app.route('/worldbuilder')
 def worldbuilder():
-    return render_template('WorldBuilder.html', setting_elements=setting_elements)
+    return render_template('test.html', setting_elements=setting_elements)
 
 @app.route('/citybuilder')
 def citybuilder():

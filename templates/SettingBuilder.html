@@ -59,6 +59,20 @@
       grid-template-columns: 1fr 1fr;
       grid-gap: 10px;
     }
+    #loading-spinner {
+    display:none;
+    border: 4px solid #f3f3f3; /* Light gray border */
+    border-top: 4px solid #3498db; /* Blue border for spinning effect */
+    border-radius: 50%; /* Create a circular shape */
+    width: 20px; /* Set the width and height of the spinner */
+    height: 20px;
+    animation: spin 1s linear infinite; /* Apply the spinning animation */
+    margin: 0 auto; /* Center the spinner */
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); } /* Starting position */
+      100% { transform: rotate(360deg); } /* Rotate a full circle */
+    }
   </style>
 </head>
 <body>
@@ -66,7 +80,7 @@
     <div class="header">
       <h1>Setting Builder</h1>
     </div>
-    <form action="/settingbuilder" method="post">
+    <form action="/settingbuilder" method="post" id="settingForm">
       <br>
       <label for="setting-name">Setting Name:</label>
       <input type="text" id="setting-name" name="setting-name" ><br><br>
@@ -116,13 +130,15 @@
       <label for="negative-description">Negative Description:</label>
       <textarea id="negative-description" name="negative-description" ></textarea><br><br>
 
-      <input type="submit" value="submit"><br><br>
+      <input type="submit" value="submit" id="submitButton"><br><br>
 
       <div class="response-container">
         <h1>Response from GPT-3.5 Turbo:</h1>
         <p>{{ setting_elements["gpt_response"] }}</p>
     </div>
     </form>
+    <div id="loading-spinner"></div>
+    <script src="{{ url_for('static', filename='scripts/loadingAnimation.js') }}"></script>
   </div>
 </body>
 </html>
